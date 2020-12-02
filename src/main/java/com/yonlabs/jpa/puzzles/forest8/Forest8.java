@@ -1,9 +1,6 @@
 package com.yonlabs.jpa.puzzles.forest8;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,7 +12,7 @@ public class Forest8 {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "growsIn")
+    @OneToMany(mappedBy = "growsIn", cascade = CascadeType.REMOVE)
     private Collection<Tree8> trees = new ArrayList<>();
 
     public Long getId() {

@@ -41,4 +41,18 @@ public class Forest8Test extends BaseJPATest {
         assert (sqlCounters.getUpdateCount() == 0);
     }
 
+    @Test
+    void testRemoveForest() {
+        transactionTemplate.execute(status -> {
+            Forest8 forest = entityManager.find(Forest8.class, existingForest.getId());
+            entityManager.remove(forest);
+            return null;
+        });
+
+        assert (sqlCounters.getSelectCount() == 2);
+        assert (sqlCounters.getDeleteCount() == 10001);
+        assert (sqlCounters.getInsertCount() == 0);
+        assert (sqlCounters.getUpdateCount() == 0);
+    }
+
 }
